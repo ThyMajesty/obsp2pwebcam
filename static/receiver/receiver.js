@@ -84,12 +84,10 @@
             conn = null;
             status.innerHTML = "Connection destroyed. Please refresh";
             console.log('Connection destroyed');
-            intervalIDArr.push( window.setInterval(initialize(), 1000));
         });
         peer.on('error', function (err) {
             console.log(err);
             status.innerHTML = err;
-            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     };
 
