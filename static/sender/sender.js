@@ -10,6 +10,7 @@
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
     var constraints = { audio: false, video: true};
+    var key = null;
 
     const startChat = async () => {
 
@@ -31,7 +32,7 @@
         // Create own peer object with connection to shared PeerJS server
         peer = new Peer(null, {host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
         console.log(peer);
-        let key = (new URLSearchParams(window.location.search)).get('key') || null;
+        key = (new URLSearchParams(window.location.search)).get('key') || null;
         if (key) {
             join();
         }
