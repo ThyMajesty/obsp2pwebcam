@@ -21,8 +21,8 @@
     function initialize() {
         key = (new URLSearchParams(window.location.search)).get('key') || null;
         // Create own peer object with connection to shared PeerJS server
-        //peer = new Peer(key, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
-        peer = new Peer(key, { });
+        peer = new Peer(key, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        //peer = new Peer(key, { });
         console.log(peer);
 
         peer.on('call', call => {
