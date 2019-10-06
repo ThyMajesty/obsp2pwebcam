@@ -8,9 +8,7 @@
     var status = document.getElementById("status");
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
-    var constraints = { audio: false, video: { facingMode: 'environment',
-            width: { ideal: 1080 },
-            height: { ideal: 1920 } }};
+    var constraints = { audio: false, video: true};
 
     /**
      * Create the Peer object for our end of the connection.
@@ -20,7 +18,7 @@
      */
     function initialize() {
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer('receiver', { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        peer = new Peer(null, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
         console.log(peer);
         peer.on('call', call => {
             const startChat = async () => {

@@ -9,9 +9,7 @@
     var connectButton = document.getElementById("connect-button");
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
-    var constraints = { audio: false, video: { facingMode: 'environment',
-            width: { ideal: 1080 },
-            height: { ideal: 1920 } }};
+    var constraints = { audio: false, video: true};
 
     const startChat = async () => {
 
@@ -31,7 +29,7 @@
      */
     function initialize() {
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer('sender', {host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        peer = new Peer(null, {host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
         console.log(peer);
         peer.on('open', function (id) {
             // Workaround for peer.reconnect deleting previous id
