@@ -13,7 +13,7 @@
     const startChat = async () => {
         var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-        const localStream = await getUserMedia({
+        const localStream = await getUserMedia.call(navigator, {
             video: true
         });
         videoLocal.srcObject = localStream;
