@@ -9,12 +9,11 @@
     var connectButton = document.getElementById("connect-button");
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
+    var constraints = { audio: false, video: { width: 1280, height: 720 }};
 
     const startChat = async () => {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-        const localStream = await navigator.getUserMedia({
-            video: true
-        });
+
+        const localStream = await navigator.mediaDevices.getUserMedia(constraints);
         videoLocal.srcObject = localStream;
         console.log(peer);
         const call = peer.call(receiverId, localStream)

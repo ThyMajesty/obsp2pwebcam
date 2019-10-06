@@ -8,6 +8,7 @@
     var status = document.getElementById("status");
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
+    var constraints = { audio: false, video: { width: 1280, height: 720 }};
 
     /**
      * Create the Peer object for our end of the connection.
@@ -21,10 +22,7 @@
         console.log(peer);
         peer.on('call', call => {
             const startChat = async () => {
-                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                const localStream = await navigator.getUserMedia({
-                    video: true
-                });
+                const localStream = await navigator.mediaDevices.getUserMedia(constraints);
                 videoLocal.srcObject = localStream;
                 call.answer(localStream);
                 call.on('stream', remoteStream => {
