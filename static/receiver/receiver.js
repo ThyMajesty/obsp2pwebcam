@@ -17,8 +17,8 @@
      */
     function initialize() {
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(null, {  });
-
+        peer = new Peer(null, { host: 'localhost', port: 3000, path: '/peer' });
+        console.log(peer);
         peer.on('call', call => {
             const startChat = async () => {
                 const localStream = await navigator.mediaDevices.getUserMedia({
