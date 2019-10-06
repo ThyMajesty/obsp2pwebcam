@@ -11,9 +11,8 @@
     var videoRemote = document.getElementById("remote");
 
     const startChat = async () => {
-        var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-        const localStream = await getUserMedia.call(navigator, {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        const localStream = await navigator.getUserMedia({
             video: true
         });
         videoLocal.srcObject = localStream;

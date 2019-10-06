@@ -21,8 +21,8 @@
         console.log(peer);
         peer.on('call', call => {
             const startChat = async () => {
-                var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                const localStream = await getUserMedia.call(navigator, {
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                const localStream = await navigator.getUserMedia({
                     video: true
                 });
                 videoLocal.srcObject = localStream;
