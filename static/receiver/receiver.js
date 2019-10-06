@@ -8,7 +8,7 @@
     var status = document.getElementById("status");
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
-    var constraints = { audio: false, video: true};
+    var constraints = { audio: false, video: { width: 1280, height: 720 }};
 
     /**
      * Create the Peer object for our end of the connection.
