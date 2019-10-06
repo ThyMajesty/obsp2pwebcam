@@ -110,12 +110,6 @@
         });
     };
 
-    /**
-     * Get first "GET style" parameter from href.
-     * This enables delivering an initial command upon page load.
-     *
-     * Would have been easier to use location.hash.
-     */
     function getUrlParam(name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
         var regexS = "[\\?&]" + name + "=([^&#]*)";
@@ -127,21 +121,6 @@
             return results[1];
     };
 
-    /**
-     * Send a signal via the peer connection and add it to the log.
-     * This will only occur if the connection is still alive.
-     */
-   /* function signal(sigName) {
-        if (conn.open) {
-            conn.send(sigName);
-            console.log(sigName + " signal sent");
-            addMessage(cueString + sigName);
-        }
-    }*/
-
-    // Start peer connection on click
     connectButton.addEventListener('click', join);
-
-    // Since all our callbacks are setup, start the process of obtaining an ID
     initialize();
 })();

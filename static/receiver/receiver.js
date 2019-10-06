@@ -107,7 +107,7 @@
             status.innerHTML = "Connection reset<br>Awaiting connection...";
             conn = null;
             start(true);
-            intervalID = window.setInterval(initialize(), 1000);
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     }
 
