@@ -11,6 +11,7 @@
     var constraints = { audio: false, video: true};
     var key = null;
 
+
     /**
      * Create the Peer object for our end of the connection.
      *
