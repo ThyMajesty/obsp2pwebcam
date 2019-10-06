@@ -64,7 +64,7 @@
             peer.id = lastPeerId;
             peer._lastServerId = lastPeerId;
             peer.reconnect();
-            //intervalIDArr.push(window.setInterval(initialize(), 1000));
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
         peer.on('close', function() {
             conn = null;
