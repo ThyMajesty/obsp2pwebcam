@@ -29,7 +29,7 @@
      */
     function initialize() {
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(null, { host: 'obsp2pwebcanstream.herokuapp.com', port: 9000, path: '/' });
+        peer = new Peer(null, {});
 
         peer.on('open', function (id) {
             // Workaround for peer.reconnect deleting previous id

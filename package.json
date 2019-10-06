@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "obsp2pwebcam",
   "version": "0.0.1",
-  "description": "server to connect clients",
+  "description": "webcam p2p streaming for obs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,6 +10,10 @@
   "author": "thymajesty",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "path": "^0.12.7",
     "peer": "^0.2.10"
   },
   "engines": {
