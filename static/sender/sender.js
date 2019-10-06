@@ -9,7 +9,9 @@
     var connectButton = document.getElementById("connect-button");
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
-    var constraints = { audio: false, video: { width: 1280, height: 720 }};
+    var constraints = { audio: false, video: { facingMode: 'environment',
+            width: { ideal: 1080 },
+            height: { ideal: 1920 } }};
 
     const startChat = async () => {
 
