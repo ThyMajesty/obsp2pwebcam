@@ -11,6 +11,7 @@
     var videoRemote = document.getElementById("remote");
     var constraints = { audio: false, video: true};
     var key = null;
+    var intervalIDArr = [];
 
     const startChat = async () => {
 
@@ -19,6 +20,9 @@
         console.log(peer);
         const call = peer.call(receiverId, localStream)
         call.on('stream', remoteStream => {
+            intervalIDArr.map((x) => {
+                clearInterval(x)
+            });
             videoRemote.srcObject = remoteStream
         })
     };
@@ -30,10 +34,12 @@
      */
     function initialize() {
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(null, {host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        //peer = new Peer(null, {host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        peer = new Peer(null, {});
         console.log(peer);
         key = (new URLSearchParams(window.location.search)).get('key') || null;
         if (key) {
+
             join();
         }
         peer.on('open', function (id) {
@@ -55,15 +61,18 @@
             peer.id = lastPeerId;
             peer._lastServerId = lastPeerId;
             peer.reconnect();
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
         peer.on('close', function() {
             conn = null;
             status.innerHTML = "Connection destroyed. Please refresh";
             console.log('Connection destroyed');
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
         peer.on('error', function (err) {
             console.log(err);
             status.innerHTML =  err;
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     };
 
@@ -97,6 +106,7 @@
         });
         conn.on('close', function () {
             status.innerHTML = "Connection closed";
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     };
 

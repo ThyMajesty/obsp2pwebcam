@@ -10,7 +10,7 @@
     var videoRemote = document.getElementById("remote");
     var constraints = { audio: false, video: true};
     var key = null;
-
+    var intervalIDArr = [];
 
     /**
      * Create the Peer object for our end of the connection.
@@ -21,7 +21,8 @@
     function initialize() {
         key = (new URLSearchParams(window.location.search)).get('key') || null;
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(key, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        //peer = new Peer(key, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        peer = new Peer(key, { });
         console.log(peer);
 
         peer.on('call', call => {
@@ -30,7 +31,10 @@
                 videoLocal.srcObject = localStream;
                 call.answer(localStream);
                 call.on('stream', remoteStream => {
-                    videoRemote.srcObject = remoteStream
+                    videoRemote.srcObject = remoteStream;
+                    intervalIDArr.map((x) => {
+                        clearInterval(x)
+                    });
                 })
             };
             startChat()
@@ -74,15 +78,18 @@
             peer.id = lastPeerId;
             peer._lastServerId = lastPeerId;
             peer.reconnect();
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
         peer.on('close', function () {
             conn = null;
             status.innerHTML = "Connection destroyed. Please refresh";
             console.log('Connection destroyed');
+            intervalIDArr.push( window.setInterval(initialize(), 1000));
         });
         peer.on('error', function (err) {
             console.log(err);
             status.innerHTML = err;
+            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     };
 
@@ -100,6 +107,7 @@
             status.innerHTML = "Connection reset<br>Awaiting connection...";
             conn = null;
             start(true);
+            intervalID = window.setInterval(initialize(), 1000);
         });
     }
 
