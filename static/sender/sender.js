@@ -31,6 +31,10 @@
         // Create own peer object with connection to shared PeerJS server
         peer = new Peer(null, {host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
         console.log(peer);
+        let key = (new URLSearchParams(window.location.search)).get('key') || null;
+        if (key) {
+            join();
+        }
         peer.on('open', function (id) {
             // Workaround for peer.reconnect deleting previous id
             if (peer.id === null) {
@@ -75,7 +79,7 @@
         }
 
         // Create connection to destination peer specified in the input field
-        receiverId = recvIdInput.value;
+        receiverId = recvIdInput.value || key;
         conn = peer.connect(receiverId, {
             reliable: true
         });

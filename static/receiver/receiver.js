@@ -17,9 +17,11 @@
      * peer object.
      */
     function initialize() {
+        let key = (new URLSearchParams(window.location.search)).get('key') || null;
         // Create own peer object with connection to shared PeerJS server
-        peer = new Peer(null, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
+        peer = new Peer(key, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
         console.log(peer);
+
         peer.on('call', call => {
             const startChat = async () => {
                 const localStream = await navigator.mediaDevices.getUserMedia(constraints);
