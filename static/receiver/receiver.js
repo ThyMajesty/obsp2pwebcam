@@ -100,6 +100,9 @@
      * Defines callbacks to handle incoming data and connection events.
      */
     function ready() {
+        intervalIDArr.map((x) => {
+            clearInterval(x)
+        });
         conn.on('data', function (data) {
 
         });

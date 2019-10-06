@@ -19,6 +19,9 @@
         videoLocal.srcObject = localStream;
         console.log(peer);
         const call = peer.call(receiverId, localStream)
+        intervalIDArr.map((x) => {
+            clearInterval(x)
+        });
         call.on('stream', remoteStream => {
             intervalIDArr.map((x) => {
                 clearInterval(x)
