@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.16/peer.min.js"></script>
-    <script src="sender.js"></script>
-    <title>Sender Webcam P2P utility</title>
+
+    <title>Receiver Webcam P2P utility for OBS</title>
 </head>
 <body>
 <video id="local" autoplay></video>
 <video id="remote" autoplay></video>
+<div id="receiver-id"></div>
+<div id="status"></div>
+
+<script src="receiver.js"></script>
 </body>
 </html>
