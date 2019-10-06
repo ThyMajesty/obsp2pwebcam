@@ -9,6 +9,7 @@
     var videoLocal = document.getElementById("local");
     var videoRemote = document.getElementById("remote");
     var constraints = { audio: false, video: true};
+    var key = null;
 
     /**
      * Create the Peer object for our end of the connection.
@@ -17,7 +18,7 @@
      * peer object.
      */
     function initialize() {
-        let key = (new URLSearchParams(window.location.search)).get('key') || null;
+        key = (new URLSearchParams(window.location.search)).get('key') || null;
         // Create own peer object with connection to shared PeerJS server
         peer = new Peer(key, { host: 'obsp2pwebcanstream.herokuapp.com', secure:true, port:443, key: 'peerjs', debug: 3, path: '/peer'});
         console.log(peer);
