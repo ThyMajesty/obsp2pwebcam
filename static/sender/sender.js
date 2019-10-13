@@ -34,7 +34,6 @@
         console.log(peer);
         key = (new URLSearchParams(window.location.search)).get('key') || null;
         if (key) {
-
             join();
         }
         peer.on('open', function (id) {
@@ -61,6 +60,9 @@
             conn = null;
             status.innerHTML = "Connection destroyed. Please refresh";
             console.log('Connection destroyed');
+            peer.id = lastPeerId;
+            peer._lastServerId = lastPeerId;
+            peer.reconnect();
         });
         peer.on('error', function (err) {
             console.log(err);
@@ -95,9 +97,6 @@
             if (command)
                 conn.send(command);
             startChat();
-        });
-        conn.on('close', function () {
-            status.innerHTML = "Connection closed";
         });
     };
 
