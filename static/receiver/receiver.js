@@ -32,9 +32,6 @@
                 call.answer(localStream);
                 call.on('stream', remoteStream => {
                     videoRemote.srcObject = remoteStream;
-                    intervalIDArr.map((x) => {
-                        clearInterval(x)
-                    });
                 })
             };
             startChat()
@@ -78,7 +75,6 @@
             peer.id = lastPeerId;
             peer._lastServerId = lastPeerId;
             peer.reconnect();
-            //intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
         peer.on('close', function () {
             conn = null;
@@ -108,7 +104,6 @@
             status.innerHTML = "Connection reset<br>Awaiting connection...";
             conn = null;
             start(true);
-            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     }
 

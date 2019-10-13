@@ -11,21 +11,13 @@
     var videoRemote = document.getElementById("remote");
     var constraints = { audio: false, video: true};
     var key = null;
-    var intervalIDArr = [];
 
     const startChat = async () => {
-
         const localStream = await navigator.mediaDevices.getUserMedia(constraints);
         videoLocal.srcObject = localStream;
         console.log(peer);
-        const call = peer.call(receiverId, localStream)
-        intervalIDArr.map((x) => {
-            clearInterval(x)
-        });
+        const call = peer.call(receiverId, localStream);
         call.on('stream', remoteStream => {
-            intervalIDArr.map((x) => {
-                clearInterval(x)
-            });
             videoRemote.srcObject = remoteStream
         })
     };
@@ -64,7 +56,6 @@
             peer.id = lastPeerId;
             peer._lastServerId = lastPeerId;
             peer.reconnect();
-            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
         peer.on('close', function() {
             conn = null;
@@ -107,7 +98,6 @@
         });
         conn.on('close', function () {
             status.innerHTML = "Connection closed";
-            intervalIDArr.push(window.setInterval(initialize(), 1000));
         });
     };
 
