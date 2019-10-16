@@ -55,9 +55,9 @@
             if (conn) {
                 c.on('open', function () {
                     c.send("Already connected to another client");
-                    setTimeout(function () {
+                    /*setTimeout(function () {
                         c.close();
-                    }, 500);
+                    }, 500);*/
                 });
                 return;
             }
